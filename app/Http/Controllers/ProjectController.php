@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProjectRequest;
-use App\Services\ProjectService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ProjectController extends Controller
 {
-    public function __construct(private readonly ProjectService $projects) {}
-
     public function index(): View
     {
-        return view('portfolio', ['projects' => $this->projects->published()]);
+        return view('portfolio');
     }
 
     public function store(StoreProjectRequest $request): RedirectResponse
