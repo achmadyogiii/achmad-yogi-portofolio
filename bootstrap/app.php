@@ -7,6 +7,8 @@ $app = new Application(
 );
 
 if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL']) || getenv('VERCEL') !== false) {
+    $app->register(Illuminate\View\ViewServiceProvider::class);
+
     $storagePath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'porot-storage';
 
     foreach (['app/private', 'app/public', 'framework/cache/data', 'framework/sessions', 'framework/views', 'logs'] as $directory) {
