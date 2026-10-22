@@ -5,6 +5,7 @@
 /vendor
 /vendor_broken
 /vercel-dist
+/public/hot
 /storage/logs/*
 /storage/framework/cache/*
 /storage/framework/sessions/*

@@ -24,6 +24,10 @@ This Laravel app runs through the `vercel-php` serverless runtime. Vercel builds
 
 Vercel's filesystem is ephemeral. Laravel uses `/tmp` for runtime-generated storage, and the language preference uses cookie-backed sessions. Do not use the bundled SQLite database for persistent data on Vercel; configure an external database and run migrations if deploying database-backed admin features.
 
+The public portfolio does not require a database. Leave `DB_CONNECTION` unset unless you configure an external database for database-backed features. Do not set it to the literal value `null`; Laravel needs a valid connection driver.
+
+If the deployment returns HTTP 500, check the Vercel Function Logs for the Laravel/PHP error. The repository's `.env` is intentionally excluded from deployment, so confirm `APP_KEY` is set in the Vercel project's Production environment (and redeploy after changing environment variables). Set `LOG_CHANNEL=stderr` to send Laravel errors to the function logs.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
