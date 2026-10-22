@@ -7,6 +7,23 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Deploying to Vercel
+
+This Laravel app runs through the `vercel-php` serverless runtime. Vercel builds the Vite assets into a dedicated static output directory so the legacy `public/index.html` cannot shadow Laravel's dynamic homepage.
+
+1. Import the repository into Vercel and use the repository root as the project root.
+2. Add these environment variables in Vercel for Production and Preview:
+   - `APP_ENV=production`
+   - `APP_DEBUG=false`
+   - `APP_KEY` — generate locally with `php artisan key:generate --show` and add the result as a Vercel secret.
+   - `APP_URL` — the deployed site's HTTPS URL.
+   - `SESSION_DRIVER=cookie`
+   - `CACHE_STORE=array`
+   - `LOG_CHANNEL=stderr`
+3. Deploy. `vercel.json` configures the PHP function, Laravel route rewrite, asset build, and static output.
+
+Vercel's filesystem is ephemeral. Laravel uses `/tmp` for runtime-generated storage, and the language preference uses cookie-backed sessions. Do not use the bundled SQLite database for persistent data on Vercel; configure an external database and run migrations if deploying database-backed admin features.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

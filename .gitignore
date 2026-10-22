@@ -1,5 +1,6 @@
 /.phpunit.result.cache
 /node_modules
+/vercel-dist
 /public/build
 !/public/build/
 !/public/build/**
